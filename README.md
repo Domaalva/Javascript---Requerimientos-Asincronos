@@ -1,1 +1,3 @@
-# Javascript---Requerimientos-Asincronos
+# Javascript - Requerimientos Asincronos
+
+Domenika Arboleda
