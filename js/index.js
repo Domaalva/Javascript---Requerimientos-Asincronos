@@ -15,21 +15,18 @@ const processSalesCoffee = () => {
 
         const tbody = document.querySelector("#salesTable tbody");
 
-        for (let sale of sales) {
+        let html = "";
 
-            const date =
-                sale.getElementsByTagName("Date")[0].textContent;
+        for (let i = 0; i < sales.length; i++) {
 
-            const coffee =
-                sale.getElementsByTagName("coffee_name")[0].textContent;
+            const sale = sales[i];
 
-            const money =
-                sale.getElementsByTagName("money")[0].textContent;
+            const date = sale.getElementsByTagName("Date")[0]?.textContent || "";
+            const coffee = sale.getElementsByTagName("coffee_name")[0]?.textContent || "";
+            const money = sale.getElementsByTagName("money")[0]?.textContent || "";
+            const payment = sale.getElementsByTagName("cash_type")[0]?.textContent || "";
 
-            const payment =
-                sale.getElementsByTagName("cash_type")[0].textContent;
-
-            tbody.innerHTML += `
+            html += `
                 <tr class="border-b border-amber-300">
                     <td class="py-2 px-4">${date}</td>
                     <td class="py-2 px-4">${coffee}</td>
@@ -38,10 +35,14 @@ const processSalesCoffee = () => {
                 </tr>
             `;
         }
+
+        tbody.innerHTML = html;
+
+        console.log("Filas agregadas:", sales.length);
     };
 
     request.onerror = () => {
-        console.error("Error al cargar el XML");
+        console.error("Error al cargar XML");
     };
 };
 
