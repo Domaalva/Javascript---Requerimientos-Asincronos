@@ -37,3 +37,6 @@ const processSalesCoffee = () => {
         new DataTable("#salesTable");
     };
 };
+window.onload = () => {
+    processSalesCoffee();
+};
