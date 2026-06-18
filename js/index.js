@@ -4,7 +4,12 @@ const processSalesCoffee = () => {
 
     request.onload = () => {
 
-        const xml = request.responseXML;
+        const parser = new DOMParser();
+
+        const xml = parser.parseFromString(
+            request.responseText,
+            "text/xml"
+        );
 
         const sales = xml.getElementsByTagName("row");
 
@@ -15,7 +20,7 @@ const processSalesCoffee = () => {
             const date =
                 sale.getElementsByTagName("Date")[0].textContent;
 
-            const product =
+            const coffee =
                 sale.getElementsByTagName("coffee_name")[0].textContent;
 
             const money =
@@ -27,7 +32,7 @@ const processSalesCoffee = () => {
             tbody.innerHTML += `
                 <tr class="border-b border-amber-300">
                     <td class="py-2 px-4">${date}</td>
-                    <td class="py-2 px-4">${product}</td>
+                    <td class="py-2 px-4">${coffee}</td>
                     <td class="py-2 px-4">$${money}</td>
                     <td class="py-2 px-4">${payment}</td>
                 </tr>
@@ -36,7 +41,7 @@ const processSalesCoffee = () => {
     };
 
     request.onerror = () => {
-        alert("Error al cargar los datos.");
+        console.error("Error al cargar el XML");
     };
 };
 
